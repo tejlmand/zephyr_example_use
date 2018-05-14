@@ -1,0 +1,6 @@
+[submodule "example_use_include/zephyr"]
+	path = example_use_include/zephyr
+	url = git@github.com:tejlmand/zephyr.git
+[submodule "example_use_add_sub/zephyr"]
+	path = example_use_add_sub/zephyr
+	url = git@github.com:tejlmand/zephyr.git

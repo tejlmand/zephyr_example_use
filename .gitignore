@@ -1,0 +1,5 @@
+*.sw[op]
+build/
+del/
+*.out
+Session.vim
