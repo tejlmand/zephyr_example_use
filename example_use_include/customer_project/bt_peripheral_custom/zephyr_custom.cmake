@@ -50,20 +50,8 @@ link_directories(${CMAKE_CURRENT_LIST_DIR}/../../zephyr/lib)
 # target_link_libraries(zephyr bluetooth_host)
 # could be made to ensure libzephyr.a correctly links (if that is indeed needed)
 # For example use, we just depend all libs on each other, even though it might not be needed.
-target_link_libraries(offsets    INTERFACE         kernel zephyr net bluetooth_common 
-                      "$<$<BOOL:${CONFIG_BT_HCI}>:bluetooth_host>" 
-                      "$<$<BOOL:${CONFIG_BT_CTLR}>:bluetooth_controller>"
-                      )
-target_link_libraries(kernel     INTERFACE offsets        zephyr net bluetooth_common 
-                      "$<$<BOOL:${CONFIG_BT_HCI}>:bluetooth_host>" 
-                      "$<$<BOOL:${CONFIG_BT_CTLR}>:bluetooth_controller>"
-                      )
-target_link_libraries(zephyr     INTERFACE offsets kernel        net bluetooth_common 
-                      "$<$<BOOL:${CONFIG_BT_HCI}>:bluetooth_host>" 
-                      "$<$<BOOL:${CONFIG_BT_CTLR}>:bluetooth_controller>"
-                      )
-target_link_libraries(net        INTERFACE offsets kernel zephyr     bluetooth_common
-                      "$<$<BOOL:${CONFIG_BT_HCI}>:bluetooth_host>" 
-                      "$<$<BOOL:${CONFIG_BT_CTLR}>:bluetooth_controller>"
-                      )
+target_link_libraries(offsets    INTERFACE         kernel zephyr net bluetooth)
+target_link_libraries(kernel     INTERFACE offsets        zephyr net bluetooth)
+target_link_libraries(zephyr     INTERFACE offsets kernel        net bluetooth)
+target_link_libraries(net        INTERFACE offsets kernel zephyr     bluetooth)
 

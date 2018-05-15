@@ -40,6 +40,6 @@ target_include_directories(bt_app PUBLIC $ENV{ZEPHYR_BASE}/samples/bluetooth)
 # could be made to ensure libzephyr.a correctly links (if that is indeed needed)
 # For example use, we just depend all libs on each other, even though it might not be needed.
 
-target_link_libraries(bt_app zephyr offsets net bluetooth_host bluetooth_common bluetooth_controller )
+target_link_libraries(bt_app zephyr offsets net bluetooth)
 
 endif()

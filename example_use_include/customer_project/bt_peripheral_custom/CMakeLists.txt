@@ -22,14 +22,14 @@ include($ENV{ZEPHYR_BASE}/subsys/bluetooth/CMakeLists.txt)
 set(CONFIG_BT_INTERNAL_STORAGE) # Clear flag if set though kconfig so we can override storage from bluetooth module
 
 # Add our own storage module
-target_sources(bluetooth_host PRIVATE
+target_sources(bluetooth PRIVATE
   # Our custom version.
   ${CMAKE_CURRENT_LIST_DIR}/custom/storage.c
 )
 
 # Remember to still link subsys__fs (just called fs as it is imported target) from zephyr
 # This is needed here, as we are manually handling this, due to file subs above.
-target_link_libraries(bluetooth_host fs)
+target_link_libraries(bluetooth PUBLIC fs)
 
 
 # There are some special zephyr linking handling, I haven't fully been able to unwrap for this small example. 
@@ -40,6 +40,6 @@ add_executable(bt_app)
 target_sources(bt_app PRIVATE ${app_sources})
 target_include_directories(bt_app PUBLIC $ENV{ZEPHYR_BASE}/samples/bluetooth)
 
-target_link_libraries(bt_app zephyr offsets net bluetooth_host bluetooth_common bluetooth_controller zephyr_interface)
+target_link_libraries(bt_app zephyr offsets net bluetooth zephyr_interface)
 
 endif()
