@@ -1,0 +1,4 @@
+[submodule "zephyr"]
+        path = zephyr
+        url = git@github.com:tejlmand/zephyr.git
+
