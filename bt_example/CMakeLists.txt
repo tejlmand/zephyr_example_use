@@ -25,9 +25,9 @@ target_link_libraries(bt_app.elf
 )
 
 # If Zephyr is cleaned up similar to bluetooth lib, then there will be no need for -Wl,--whole-archive
-# Initial proposal does not remove the need for --whole-archive, see second proposal on how to move the whole archive knowledge to the library itself.
+# And the following line will simply disapear.
 target_link_libraries(bt_app.elf
-  -Wl,--whole-archive zephyr bluetooth net -Wl,--no-whole-archive
+  -Wl,--whole-archive zephyr -Wl,--no-whole-archive
 )
 
 # This should ideally come from cmake library propagation.
