@@ -31,7 +31,4 @@ target_link_libraries(bt_app.elf
 )
 
 # This should ideally come from cmake library propagation.
-target_link_libraries(bt_app.elf
-  ${LIB_INCLUDE_DIR}
-  ${TOOLCHAIN_LIBS}
-)
+target_link_libraries(bt_app.elf ${LIB_INCLUDE_DIR})
