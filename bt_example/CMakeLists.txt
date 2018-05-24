@@ -13,8 +13,10 @@ target_sources(bt_app.elf PRIVATE ${app_sources}
 )
 target_include_directories(bt_app.elf PUBLIC $ENV{ZEPHYR_BASE}/samples/bluetooth)
 
-# Just need to link the bluetooth lib, bluetooth lib will ensure proper propagation of dependencies to Kernel, zephyr, and net.
-target_link_libraries(bt_app.elf )
+# Due to the need of -Wl,--whole-lib on bluetooth lib we cannot using default CMake link 
+# (and propagation), but must use, see further down:
+#   -Wl,--whole-archive zephyr bluetooth net -Wl,--no-whole-archive
+# target_link_libraries(bt_app.elf bluetooth)
 
 # Those are link flags a customer would normally decide if he wants.
 # Alternatively, providing an CMake interface lib could be used for flag propagation
@@ -25,7 +27,8 @@ target_link_libraries(bt_app.elf
 )
 
 # If Zephyr is cleaned up similar to bluetooth lib, then there will be no need for -Wl,--whole-archive
-# Initial proposal does not remove the need for --whole-archive, see second proposal on how to move the whole archive knowledge to the library itself.
+# Initial proposal does not remove the need for --whole-archive, see second proposal on how to move
+# the whole archive knowledge to the library itself.
 target_link_libraries(bt_app.elf
   -Wl,--whole-archive zephyr bluetooth net -Wl,--no-whole-archive
 )
